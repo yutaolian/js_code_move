@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>运动框架---网页侧边的分享到实例</title>
+    <style>
+
+        #div1{
+            width: 100px;
+            height: 200px;
+            position: absolute;
+            left: -100px;
+            top: 200px;
+            background-color:#808080;
+        }
+        #div1 span{
+            width: 20px;
+            height: 60px;
+            background-color: chartreuse;
+            line-height: 20px;
+            text-align: center;
+            left: 100px;
+            top: 50px;
+            position: absolute;
+
+        }
+    </style>
+    <script>
+
+        window.onload = function(){
+            var oDiv = document.getElementById("div1");
+            oDiv.onmouseover = function(){
+                //startMove(10,0);
+                startMove(0);
+            }
+            oDiv.onmouseout = function(){
+                //startMove(-10,-100);
+                startMove(-100);
+            }
+        }
+
+        var timer = null;
+        /*
+         function startMove(speed,target){
+         var oDiv = document.getElementById("div1");
+
+         clearInterval(timer);
+
+         timer = setInterval(function(){
+
+         if(oDiv.offsetLeft==target){
+         clearInterval(timer);
+         }else{
+         oDiv.style.left = oDiv.offsetLeft+speed+'px';
+         }
+
+         },30);
+         }*/
+        //改进版删除速度参数,只留目标点参数
+        function startMove(target){
+            var oDiv = document.getElementById("div1");
+
+            clearInterval(timer);
+            timer = setInterval(function(){
+                var speed = 0;
+                if(oDiv.offsetLeft<target){
+                    speed = 10;
+                }else{
+                    speed = -10;
+                }
+                if(oDiv.offsetLeft==target){
+                    clearInterval(timer);
+                }else{
+                    oDiv.style.left = oDiv.offsetLeft+speed+'px';
+                }
+
+            },30);
+        }
+    </script>
+</head>
+<body>
+
+<h2>运动框架</h2>
+
+<h3>1.开始运动时，关闭已有的定时器</h3>
+<h3>2.把运动和停止隔开（if/else）</h3>
+<div id="div1"><span>分享到</span></div>
+
+</body>
+</html>
