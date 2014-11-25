@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>运动框架---图片或div的淡入淡出</title>
+    <style>
+        #div1{
+
+            width: 200px;
+            height: 200px;
+            background-color: aqua;
+            top: 100px;
+            opacity: 0.2;/*火狐 google*/
+            filter: alpha(opacity:20);/*ie*/
+        }
+    </style>
+    <script>
+
+        window.onload = function(){
+
+            var oDiv = document.getElementById("div1");
+
+            oDiv.onmouseover = function(){
+                startMove(100);
+            }
+            oDiv.onmouseout = function(){
+                startMove(20);
+            }
+        }
+
+        var timmer = null;
+
+        var alpha = 20;
+        function startMove(target){
+
+            var oDiv = document.getElementById("div1");
+
+            clearInterval(timmer);
+            timmer = setInterval(function(){
+
+                if(alpha<target){
+                    speed = 2;
+                }else{
+                    speed = -2;
+                }
+
+                if(alpha==target){
+                    clearInterval(timmer);
+                }else{
+                    alpha+=speed;
+
+                    oDiv.style.filter = 'alpha(opacity:)'+alpha+')';
+                    oDiv.style.opacity = alpha/100;
+
+                    document.title = alpha;
+                }
+
+            },30)
+
+        };
+    </script>
+</head>
+<body>
+
+<div id="div1"></div>
+
+</body>
+</html>
