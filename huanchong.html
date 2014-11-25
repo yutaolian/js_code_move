@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>运动框架---缓冲运动</title>
+    <style>
+        #div1{
+            width: 200px;
+            height: 200px;
+            background-color: #808080;
+            position: absolute;
+            top: 100px;
+            left:0px;
+        }
+    </style>
+    <script>
+        var timmer = null;
+
+        function startMove(target){
+
+            var oDiv = document.getElementById("div1");
+
+            clearInterval(timmer);
+            timmer = setInterval(function(){
+
+                var speed = (target-oDiv.offsetLeft)/8;
+                //if-else 可以改为三目运算
+               /* if(speed>0){
+                    //向上取整（11.8 -> 11）
+                    speed = Math.ceil(speed);
+                }else{
+                    //向下取整（-0.8 -> -1）
+                    speed = Math.floor(speed);
+                }*/
+
+                speed = speed>0?Math.ceil(speed):Math.floor(speed);
+
+                if(oDiv.offsetLeft==target){
+
+                    clearInterval(timmer);
+
+                }else{
+
+                    oDiv.style.left = oDiv.offsetLeft+speed+"px";
+                    document.title = oDiv.style.left;
+                }
+
+
+            },30);
+
+        };
+    </script>
+</head>
+<body>
+<input type="button" value="MOVE" onclick="startMove(500)">
+<div id="div1"></div>
+<span style="width: 1px;height: 300px;background-color: black;position: absolute;left: 500px "></span>
+</body>
+</html>
