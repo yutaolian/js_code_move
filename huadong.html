@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>运动框架---滑动框</title>
+    <style>
+        #div1{
+            width: 200px;
+            height: 200px;
+            background-color: brown;
+            position: absolute;
+            right: 0px;
+
+        }
+
+    </style>
+    <script>
+        window.onscroll = function(){
+
+            var oDiv = document.getElementById("div1")
+
+            var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+
+          //  oDiv.style.top = scrollTop+(document.documentElement.clientHeight-oDiv.offsetHeight)/2+"px";
+
+            var t = scrollTop+(document.documentElement.clientHeight-oDiv.offsetHeight)/2;
+            //不转为整数的会抖动（就是目标点位小数，屏幕的像素没有小数。）
+            startMove(parseInt(t));
+
+        }
+
+        var timmer = null;
+        function startMove(target){
+
+            var oDiv = document.getElementById("div1");
+
+            clearInterval(timmer);
+
+            timmer = setInterval(function(){
+
+                var speed = (target-oDiv.offsetTop)/8;
+
+                speed = speed>0?Math.ceil(speed):Math.floor(speed);
+
+                if(oDiv.offsetTop == target){
+
+                    clearInterval(timmer);
+
+                }else{
+
+                    oDiv.style.top = oDiv.offsetTop+speed+'px';
+                }
+            },30)
+        }
+    </script>
+</head>
+
+
+
+<body style="height: 3000px">
+<div id="div1">你好</div>
+</body>
+</html>
