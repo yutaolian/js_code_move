@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>运动框架---匀速运动</title>
+    <style>
+
+        #div1{
+            width: 200px;
+            height:200px;
+            position: absolute;/*必须定义绝对定位*/
+            background-color: cadetblue;
+            top: 100px;
+            left: 0px;/*必须定义这个*/
+        }
+    </style>
+
+    <script>
+        var timmer = null;
+
+        //运动函数
+        function startMove(){
+            var oDiv = document.getElementById("div1");
+            //打开定时器前把之前的定时器关掉
+            clearInterval(timmer);
+
+            timmer = setInterval(function(){
+                var speed = 5;
+
+                //必须使用if-else分开两种情况（运动和停止）
+                if(oDiv.offsetLeft>=500){//判断是否到达终点
+
+                    clearInterval(timmer);//到达终点之后
+                }else{
+                    oDiv.style.left = oDiv.offsetLeft+speed+"px";//到达终点之前
+                }
+            },30);
+        }
+    </script>
+
+
+</head>
+<body>
+<input type="button" value="MOVE" onclick="startMove()"/>
+
+<div id="div1" ></div>
+</body>
+</html>
