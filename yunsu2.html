@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>运动框架---匀速运动2---终止条件（范围）</title>
+</head>
+<style>
+    #div1{
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        background-color: chocolate;
+        left: 0px;
+        top: 200px;
+    }
+</style>
+<script>
+
+    var timmer = null;
+
+    function startMove(target){
+
+        var oDiv = document.getElementById("div1");
+
+        clearInterval(timmer);
+
+        timmer = setInterval(function(){
+
+            var speed = 0;
+
+            if(oDiv.offsetLeft<target){
+                speed = 7;
+            }else{
+                speed = -7;
+            }
+
+            //匀速运动的终止条件是距离足够近（在一定范围内便到达）
+            if(Math.abs(oDiv.offsetLeft-target)<7){
+                clearInterval(timmer);
+
+                oDiv.style.left = target+'px';
+
+            }else{
+                oDiv.style.left = oDiv.offsetLeft+speed+"px";
+            }
+        },30);
+
+
+    }
+
+</script>
+<body>
+<p>
+    <h3>匀速运动的停止条件</h3>
+<h4>距离足够近，在一定范围内即可</h4>
+</p>
+<input type="button" value="MOVE" onclick="startMove(500)">
+<div id="div1"></div>
+<span style="width: 1px;height: 300px;left: 500px;position: absolute;background-color: black" ></span>
+</body>
+</html>
